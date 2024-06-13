@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Room</title>
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <input type="text" name="room" id="room" required>
+        <button type="submit">join</button>
+    </form>
+</body>
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            window.location.href = window.location.href + room.value;
+        }
+    </script>
+
+</html>

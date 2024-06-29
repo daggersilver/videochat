@@ -82,6 +82,7 @@ class PeerConnection {
         }
         else {
             const newVideo = myVideo.cloneNode();
+            newVideo.muted = false;
             newVideo.srcObject = event.streams[0];
             newVideo.id = this.peerId;
     

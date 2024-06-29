@@ -4,13 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Conferencing app</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="video-grid">
-        <video id="my-video" autoplay playsinline></video>
+    <div id="main">
+        <div id="video-grid">
+            <video id="my-video" autoplay playsinline muted></video>
+        </div>
+    </div>
+    <div id="controls">
+        <button id="toggle-video" class="control-btn">
+            <i class="fa-solid fa-video"></i>
+        </button>
+        <button id="toggle-mic" class="control-btn">
+            <i class="fa-solid fa-microphone"></i>
+        </button>
+        <button id="end-call" class="control-btn">
+            <i class="fa-solid fa-phone-flip"></i>
+        </button>
     </div>
 </body>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="script.js" defer></script>
+    <script src="utils.js"></script>
+    <script src="peerConnection.js"></script>
+    <script src="script.js" ></script>
+
+    <script>
+        const videoToggleBtn = document.getElementById('toggle-video');
+        const micToggleBtn = document.getElementById('toggle-mic');
+
+        videoToggleBtn.onclick = () => {
+            const videoIcon = videoToggleBtn.querySelector('i');
+
+            if(videoIcon.classList.contains('fa-video')) {
+                videoIcon.classList.remove('fa-video');
+                videoIcon.classList.add('fa-video-slash');
+                updateCamStatus(false);
+            }
+            else {
+                videoIcon.classList.remove('fa-video-slash');
+                videoIcon.classList.add('fa-video');
+                updateCamStatus(true);
+            }
+
+        }
+
+        micToggleBtn.onclick = () => {
+            const micIcon = micToggleBtn.querySelector('i');
+
+            if(micIcon.classList.contains('fa-microphone')) {
+                micIcon.classList.remove('fa-microphone');
+                micIcon.classList.add('fa-microphone-slash');
+                updateMicStatus(false);
+            }
+            else {
+                micIcon.classList.remove('fa-microphone-slash');
+                micIcon.classList.add('fa-microphone');
+                updateMicStatus(true);
+            }
+        }
+    </script>
 </html>

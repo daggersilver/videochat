@@ -23,9 +23,11 @@ io.on('connection', (socket) => {
     socket.on('join-room', (room) => {
         socket.join(room);
 
-        console.log(room);
-
         socket.to(room).emit('new-user', (socket.id));
+
+        socket.on('disconnect', () => {
+            socket.to(room).emit('user-left', socket.id);
+        })
     });
 
     socket.on('video-offer', (data) => {
@@ -38,7 +40,8 @@ io.on('connection', (socket) => {
 
     socket.on('new-ice-candidate', (data) => {
         io.to(data.target).emit('receive-ice-candidate', data);
-    })
+    });
+
 });
 
 server.listen(PORT, () => {
